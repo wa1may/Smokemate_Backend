@@ -1,0 +1,511 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Smokemate API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Создать нового пользователя",
+        "description": "Создаёт нового пользователя",
+        "requestBody": {
+          "description": "Создаваемый профиль пользователя",
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "login": "name_surname",
+                "passwordhash": 123123123,
+                "registrationDate": "2024-01-01"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Пользователь создан"
+          }
+        }
+      }
+    },
+    "/users/{usersID}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Найти пользователя по айди",
+        "description": "Находит пользователя по айди",
+        "parameters": [
+          {
+            "name": "usersID",
+            "in": "path",
+            "description": "Айди пользователя",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Пользователь найден"
+          },
+          "404": {
+            "description": "Пользователь не найден"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Изменить пользователя",
+        "description": "Изменить пользователя",
+        "parameters": [
+          {
+            "name": "usersID",
+            "in": "path",
+            "description": "Айди пользователя",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Обновлённый профиль пользователя",
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "login": "new_name_surname",
+                "passwordhash": "new_123123123",
+                "registrationDate": "new_2024-01-01"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Пользователь обновлён"
+          },
+          "404": {
+            "description": "Пользователь не найден"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Удалить профиль пользователя",
+        "description": "Удаляет профиль пользователя",
+        "parameters": [
+          {
+            "name": "usersID",
+            "in": "path",
+            "description": "Айди пользователя",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Пользователь удалён"
+          },
+          "404": {
+            "description": "Пользователь не найден"
+          }
+        }
+      }
+    },
+    "/userProfiles": {
+      "post": {
+        "tags": [
+          "UserProfiles"
+        ],
+        "summary": "Создать новый профиль пользователя",
+        "description": "Создаёт новый профиль пользователя",
+        "requestBody": {
+          "description": "Создаваемый профиль пользователя",
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "userID": 1,
+                "firstName": "name",
+                "lastName": "surname",
+                "birthday": "2024-01-01",
+                "email": "example@gmail.com",
+                "phoneNumber": 1234567890,
+                "country": "Country",
+                "city": "City",
+                "favoriteCigarettes": "cigarettes",
+                "profileDescription": "description",
+                "profilePhotoURL": "http://photo.jpg"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Профиль создан"
+          }
+        }
+      }
+    },
+    "/userProfiles/{usersID}": {
+      "get": {
+        "tags": [
+          "UserProfiles"
+        ],
+        "summary": "Найти профиль пользователя",
+        "description": "Находит профиль пользователя",
+        "parameters": [
+          {
+            "name": "usersID",
+            "in": "path",
+            "description": "Айди пользователя",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Профиль найден"
+          },
+          "404": {
+            "description": "Профиль не найден"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UserProfiles"
+        ],
+        "summary": "Обновить профиль пользователя",
+        "description": "Обновляет профиль пользователя",
+        "parameters": [
+          {
+            "name": "usersID",
+            "in": "path",
+            "description": "Айди пользователя",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Обновлённый профиль пользователя",
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "userID": 1,
+                "firstName": "new_name",
+                "lastName": "new_surname",
+                "birthday": "2024-01-01",
+                "email": "new_example@gmail.com",
+                "phoneNumber": "1234567890",
+                "country": "new_Country",
+                "city": "new_City",
+                "favoriteCigarettes": "new_cigarettes",
+                "profileDescription": "new_description",
+                "profilePhotoURL": "new_http://photo.jpg"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Профиль пользователя обновлён"
+          },
+          "404": {
+            "description": "Профиль пользователя не найден"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UserProfiles"
+        ],
+        "summary": "Удалить профиль пользователя",
+        "description": "Удаляет профиль пользователя",
+        "parameters": [
+          {
+            "name": "usersID",
+            "in": "path",
+            "description": "Айди пользователя",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Пользователь удалён"
+          },
+          "404": {
+            "description": "Пользователь не найден"
+          }
+        }
+      }
+    },
+    "/profilePhotos": {
+      "post": {
+        "tags": [
+          "ProfilePhotos"
+        ],
+        "summary": "Добавить фото профиля",
+        "description": "Добавить фото профиля",
+        "requestBody": {
+          "description": "Добавленное фото пользователя",
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "photoID": 1,
+                "userID": 1,
+                "photoURL": "http://photo.jpg",
+                "isMainPhoto": 1
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Фото добавлено"
+          }
+        }
+      }
+    },
+    "/profilePhotos/{usersID}": {
+      "get": {
+        "tags": [
+          "ProfilePhotos"
+        ],
+        "summary": "Найти фото профиля",
+        "description": "Найти фото профиля",
+        "parameters": [
+          {
+            "name": "usersID",
+            "in": "path",
+            "description": "Айди пользователя",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Фото найдено"
+          },
+          "404": {
+            "description": "Фото не найдено"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ProfilePhotos"
+        ],
+        "summary": "Обновить фото пользователя",
+        "description": "Обновить фото пользователя",
+        "parameters": [
+          {
+            "name": "usersID",
+            "in": "path",
+            "description": "Айди пользователя",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Обновлённое фото пользователя",
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "photoID": 1,
+                "userID": 1,
+                "photoURL": "new_http://photo.jpg",
+                "isMainPhoto": 1
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Фото пользователя обновлено"
+          },
+          "404": {
+            "description": "Фото пользователя не найдено"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ProfilePhotos"
+        ],
+        "summary": "Удаляет фото пользователя",
+        "description": "Удаляет фото пользователя",
+        "parameters": [
+          {
+            "name": "usersID",
+            "in": "path",
+            "description": "Айди пользователя",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Фото пользователья удалено"
+          },
+          "404": {
+            "description": "Фото пользователя не найдено"
+          }
+        }
+      }
+    },
+    "/Messages": {
+      "post": {
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Добвить сообщение",
+        "description": "Добвить сообщение",
+        "requestBody": {
+          "description": "Добавить сообщение",
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "messageID": 1,
+                "senderID": 1,
+                "receiverID": 2,
+                "messageText": "text",
+                "sendDateTime": "18:00"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Сообщение добавлено"
+          }
+        }
+      }
+    },
+    "/Messages/{usersID}": {
+      "get": {
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Найти сообщение",
+        "description": "Найти сообщение",
+        "parameters": [
+          {
+            "name": "usersID",
+            "in": "path",
+            "description": "Айди пользователя",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Сообщение найдено"
+          },
+          "404": {
+            "description": "Сообщение не найдено"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Обновить сообщение",
+        "description": "Обновить сообщение",
+        "parameters": [
+          {
+            "name": "usersID",
+            "in": "path",
+            "description": "Айди пользователя",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Обновлённое сообщение",
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "messageID": 1,
+                "senderID": 1,
+                "receiverID": 2,
+                "messageText": "new_text",
+                "sendDateTime": "18:00"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Сообщение обновлено"
+          },
+          "404": {
+            "description": "Сообщение не найдено"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Удалить сообщение",
+        "description": "Удалить сообщение",
+        "parameters": [
+          {
+            "name": "usersID",
+            "in": "path",
+            "description": "Айди пользователя",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Сообщение удалено"
+          },
+          "404": {
+            "description": "Сообщение не найдено"
+          }
+        }
+      }
+    }
+  }
+}
